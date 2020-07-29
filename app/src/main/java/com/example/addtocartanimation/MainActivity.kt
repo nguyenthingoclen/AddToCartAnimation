@@ -19,16 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val fLowerAdapter = FLowerAdapter(this, createData(), object : FLowerAdapter.OnClickListener{
             override fun onItemClickListener(imageView: ImageView) {
-//                Toast.makeText(this@MainActivity, "OnItemClickListener", Toast.LENGTH_SHORT)
-//                    .show()
-//                scale(imageView)
                 makeFlyAnimation(imageView)
-//                val scaleAnimatorY: Animator = ObjectAnimator.ofFloat(imageView, View.SCALE_Y, 1.0f,1.0f,0.5f,0.5f)
-//                val scaleAnimatorX: Animator = ObjectAnimator.ofFloat(imageView, View.SCALE_X, 1.0f,1.0f,0.5f,0.5f)
-//                val animatorCircleSet = AnimatorSet()
-//                animatorCircleSet.duration = 2000
-//                animatorCircleSet.playTogether(scaleAnimatorX, scaleAnimatorY)
-//                animatorCircleSet.start()
             }
         })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
@@ -76,13 +67,5 @@ class MainActivity : AppCompatActivity() {
             })
         animationUtil.startAnimation()
 
-    }
-
-    private fun scale(view: ImageView){
-        val mScale = AnimatorSet()
-        val sX = ObjectAnimator.ofFloat(view,View.SCALE_X,1.0f,1.0f,0.5f,0.5f)
-        val sY = ObjectAnimator.ofFloat(view,View.SCALE_Y,1.0f,1.0f,0.5f,0.5f)
-        mScale.playTogether(sX,sY)
-        mScale.start()
     }
 }
