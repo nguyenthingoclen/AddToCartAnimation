@@ -17,6 +17,7 @@ import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
+import android.widget.ImageView
 import java.lang.ref.WeakReference
 import kotlin.math.pow
 
@@ -44,7 +45,8 @@ class CircleAnimationUtil() {
 
     //    private CircleLayout mCircleLayout;
     private var mBitmap: Bitmap? = null
-    private var mImageView: CircleImageView? = null
+//    private var mImageView: CircleImageView? = null
+    private var mImageView: ImageView? = null
     private var mAnimationListener: Animator.AnimatorListener? = null
 
     fun attachActivity( activity: Activity): CircleAnimationUtil{
@@ -101,11 +103,11 @@ class CircleAnimationUtil() {
             mTarget?.let {
                 mBitmap = drawViewToBitmap(it, it.layoutParams.width, it.layoutParams.height)
             }
-            if (mImageView == null) mImageView = CircleImageView(mContextReference!!.get()!!)
+            if (mImageView == null) mImageView = ImageView(mContextReference!!.get()!!)
             mImageView?.let {
                 it.setImageBitmap(mBitmap)
-                it.setBorderWidth(mBorderWidth)
-                it.setBorderColor(mBorderColor)
+//                it.setBorderWidth(mBorderWidth)
+//                it.setBorderColor(mBorderColor)
             }
             val src = IntArray(2)
             mTarget!!.getLocationOnScreen(src)
@@ -156,24 +158,23 @@ class CircleAnimationUtil() {
                 val y = mTarget!!.y
                 val x = mTarget!!.x
                 Log.d("TAG: Util","onAnimationEnd x: $x, y: $y")
-                mTarget!!.getLocationOnScreen(src)
+                mImageView!!.getLocationOnScreen(src)
                 mDest!!.getLocationOnScreen(dest)
-                Log.d("TAG: Util","mTarget x: ${src[0]}, y: ${src[1]}, dest x: ${dest[0]}, y: ${dest[1]}")
                 val translatorX: Animator = ObjectAnimator.ofFloat(
-                    mTarget,
+                    mImageView,
                     View.X,
-                    x,
-                    x + dest[0] - (src[0] + (originX * scaleFactor - 2 * endRadius * scaleFactor) / 2) + (0.5f * destX - scaleFactor * endRadius)
+                    src[0].toFloat(),
+                    dest[0].toFloat()
                 )
                 translatorX.interpolator =
                     TimeInterpolator { input ->
                         (-(input - 1.toDouble()).pow(2.0) + 1f).toFloat()
                     }
                 val translatorY: Animator = ObjectAnimator.ofFloat(
-                    mTarget,
+                    mImageView,
                     View.Y,
-                    y,
-                    y + dest[1] - (src[1] + (originY * scaleFactor - 2 * endRadius * scaleFactor) / 2) + (0.5f * destY - scaleFactor * endRadius)
+                    src[1].toFloat(),
+                    dest[1].toFloat()
                 )
                 translatorY.interpolator = LinearInterpolator()
                 val animatorMoveSet = AnimatorSet()
@@ -182,9 +183,9 @@ class CircleAnimationUtil() {
 
                 val animatorDisappearSet = AnimatorSet()
                 val disappearAnimatorY: Animator =
-                    ObjectAnimator.ofFloat(mTarget, View.SCALE_Y, scaleFactor, 0.0f)
+                    ObjectAnimator.ofFloat(mImageView, View.SCALE_Y, scaleFactor, 0.0f)
                 val disappearAnimatorX: Animator =
-                    ObjectAnimator.ofFloat(mTarget, View.SCALE_X, scaleFactor, 0.0f)
+                    ObjectAnimator.ofFloat(mImageView, View.SCALE_X, scaleFactor, 0.0f)
                 animatorDisappearSet.duration = mDisappearDuration.toLong()
                 animatorDisappearSet.playTogether(disappearAnimatorX, disappearAnimatorY)
 
