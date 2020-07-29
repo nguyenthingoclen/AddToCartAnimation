@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,11 +39,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeFlyAnimation(image: ImageView){
 
+        val destView= findViewById<RelativeLayout>(R.id.cartImg)
         val animationUtil = CircleAnimationUtil()
             .attachActivity(this)
             .setTargetView(image)
             .setMoveDuration(1000)
-            .setDestView(cartImg)
+            .setDestView(destView)
             .setAnimationListener(object : Animator.AnimatorListener{
                 override fun onAnimationRepeat(animation: Animator?) {
 

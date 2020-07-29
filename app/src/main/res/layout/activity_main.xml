@@ -6,11 +6,11 @@
 	android:orientation="vertical"
 	android:background="#9400BCD4"
 	tools:context=".MainActivity">
-	<ImageView
+	<RelativeLayout
 		android:id="@+id/cartImg"
 		android:layout_width="40dp"
 		android:layout_height="40dp"
-		android:src="@drawable/cart"
+		android:background="@drawable/cart"
 		android:layout_alignParentRight="true" />
 
 	<androidx.recyclerview.widget.RecyclerView
