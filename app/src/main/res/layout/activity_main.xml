@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:background="#9400BCD4"
+	tools:context=".MainActivity">
+	<ImageView
+		android:id="@+id/cartImg"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		android:src="@drawable/cart"
+		android:layout_alignParentRight="true" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/rvFlower"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@id/cartImg"/>
+
+	<ImageView
+		android:id="@+id/temp"
+		android:layout_width="40dp"
+		android:layout_height="40dp"
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/rvFlower"/>
+
+</RelativeLayout>
